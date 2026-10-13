@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Defesa de Projeto: Hábitos e Desempenho Académico - UFOPA</title>
-<!-- Importação do Chart.js para os gráficos nativos -->
+<title>Hábitos e Desempenho Académico - UFOPA</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Importação da Fonte Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -43,60 +41,38 @@
     transition: all 0.3s ease;
   }
   
-  .slider-container:fullscreen {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-  }
+  .slider-container:fullscreen { width: 100vw; height: 100vh; border-radius: 0; }
 
-  .progress-container {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 5px; z-index: 30;
-  }
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-color), #38bdf8);
-    width: 0%;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .progress-container { position: absolute; top: 0; left: 0; width: 100%; height: 5px; z-index: 30; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent-color), #38bdf8); width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  .slides { 
-    display: flex; height: 100%; 
-    transition: transform 0.7s cubic-bezier(0.25, 1, 0.2, 1); 
-  }
+  .slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 1, 0.2, 1); }
 
   .slide { 
     min-width: 100%; height: 100%; 
-    padding: 55px 75px 85px 75px; 
-    box-sizing: border-box; 
-    display: flex; flex-direction: column; justify-content: center; 
-    opacity: 0; transform: translateY(15px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    padding: 50px 70px 80px 70px; 
+    box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; 
+    opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  
   .slide.active { opacity: 1; transform: translateY(0); }
 
-  .cover-slide {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    position: relative;
-  }
+  .cover-slide { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); position: relative; }
 
   h1 { color: var(--primary-color); font-size: 2.8em; margin-bottom: 12px; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
-  h2 { color: var(--primary-color); font-size: 2em; margin-bottom: 20px; border-bottom: 3px solid var(--secondary-color); padding-bottom: 8px; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; gap: 12px; }
-  h2::before { content: ''; display: block; width: 6px; height: 28px; background-color: var(--accent-color); border-radius: 4px; }
+  h2 { color: var(--primary-color); font-size: 1.9em; margin-bottom: 18px; border-bottom: 3px solid var(--secondary-color); padding-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+  h2::before { content: ''; display: block; width: 6px; height: 26px; background-color: var(--accent-color); border-radius: 4px; }
   
-  p, li { font-size: 1.1em; line-height: 1.55; margin-bottom: 10px; }
+  p, li { font-size: 1.1em; line-height: 1.5; margin-bottom: 12px; }
   
-  .author-info { margin-top: 25px; border-left: 5px solid var(--accent-color); padding: 12px 18px; background: rgba(255,255,255,0.9); border-radius: 0 10px 10px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+  .author-info { margin-top: 20px; border-left: 5px solid var(--accent-color); padding: 10px 15px; background: rgba(255,255,255,0.9); border-radius: 0 8px 8px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
   
-  /* Controles com Glassmorphism Avançado */
+  /* Controles com Glassmorphism */
   .controls { 
-    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); 
+    position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); 
     display: flex; gap: 15px; align-items: center; 
     background: rgba(15, 23, 42, 0.75); padding: 8px 20px; border-radius: 100px; 
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); z-index: 20; 
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15);
   }
   
   .dots-container { display: flex; gap: 6px; margin: 0 10px; align-items: center; }
@@ -110,22 +86,20 @@
   #btnFullscreen { position: absolute; right: -55px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
 
   /* Elementos de Conteúdo */
-  .slide-content-split { display: flex; gap: 35px; align-items: center; width: 100%; height: 100%; }
+  .slide-content-split { display: flex; gap: 30px; align-items: center; width: 100%; height: 100%; }
   .text-col { flex: 1; }
   .graphic-col { flex: 1.2; height: 100%; display: flex; flex-direction: column; justify-content: center; }
   
   .highlight { font-weight: 700; color: var(--accent-color); background-color: #eff6ff; padding: 2px 6px; border-radius: 4px; }
+  .box-alert { background-color: #fef2f2; padding: 16px; border-left: 6px solid #ef4444; border-radius: 8px; color: #991b1b; }
+  .box-insight { background-color: #f0fdf4; padding: 16px; border-left: 6px solid var(--success-color); border-radius: 8px; color: #065f46; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
   
-  .box-alert { background-color: #fef2f2; padding: 14px; border-left: 6px solid #ef4444; border-radius: 6px; color: #991b1b; }
-  .box-insight { background-color: #f0fdf4; padding: 14px; border-left: 6px solid var(--success-color); border-radius: 6px; color: #065f46; }
-  
-  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 1em; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border-bottom: 1px solid #e2e8f0; padding: 12px 16px; text-align: left; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1.05em; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border-bottom: 1px solid #e2e8f0; padding: 12px 14px; text-align: left; }
   th { background-color: #f8fafc; color: var(--primary-color); font-weight: 700; }
   tr:last-child td { border-bottom: none; }
   
-  .chart-container { position: relative; height: 340px; width: 100%; }
-  
+  .chart-container { position: relative; height: 320px; width: 100%; }
   .counter { display: inline-block; font-variant-numeric: tabular-nums; }
 </style>
 </head>
@@ -137,65 +111,122 @@
   <div class="slides" id="slides">
     
     <!-- Slide 1: Capa -->
-    <div class="slide cover-slide active" contenteditable="true">
-      <div style="text-align: right; margin-bottom: 15px;">
+    <div class="slide cover-slide active">
+      <div style="text-align: right; margin-bottom: 10px;">
         <span style="background: var(--primary-color); color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.75em; text-transform: uppercase; letter-spacing: 2px;">UFOPA • Análise Estatística</span>
       </div>
       <h1>Hábitos de Estudo e<br>Desempenho Académico</h1>
-      <p style="font-size: 1.35em; color: var(--text-muted); font-weight: 400; max-width: 800px;">Defesa do trabalho final da disciplina de Probabilidade e Estatística</p>
+      <p style="font-size: 1.3em; color: var(--text-muted); font-weight: 400; max-width: 800px;">Defesa do trabalho final da disciplina de Probabilidade e Estatística</p>
       <div class="author-info">
-        <p style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75em; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 6px;">Equipa de Investigação</p>
-        <p style="font-weight: 600; font-size: 1.1em; margin-bottom: 4px; color: var(--primary-color);">Caio Hugo Serrão Luz &bull; Gabriel Bentes Sena &bull; Juan Oliveira &bull; Josiel Santos</p>
-        <p style="font-size: 0.9em; color: var(--text-muted);">Campus Prof. Domingos Diniz, Oriximiná &mdash; 2026</p>
+        <p style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75em; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 4px;">Equipa de Investigação</p>
+        <p style="font-weight: 600; font-size: 1.05em; margin-bottom: 2px; color: var(--primary-color);">Caio Hugo Serrão Luz &bull; Gabriel Bentes Sena &bull; Juan Oliveira &bull; Josiel Santos</p>
+        <p style="font-size: 0.85em; color: var(--text-muted);">Campus Prof. Domingos Diniz, Oriximiná &mdash; 2026</p>
       </div>
     </div>
 
-    <!-- Slide 2: Problema e Contexto -->
-    <div class="slide" contenteditable="true">
-      <h2>Contexto e Formulação do Problema</h2>
-      <p>A transição para o ensino superior tecnológico exige a estruturação de rotinas extraclasse altamente eficientes. Fatores como o suporte tecnológico, a gestão do tempo e o nível de exigência das disciplinas moldam o sucesso discente.</p>
-      <p>A literatura <span class="highlight">(Andrade-Valles et al., 2018)</span> demonstra que os hábitos e atitudes de aprendizagem operam como eixos determinantes do rendimento.</p>
-      <div class="box-insight" style="margin-top: 20px; padding: 20px;">
-        <strong style="font-size: 1em; text-transform: uppercase; letter-spacing: 1px; color: var(--success-color);">Questão Central da Investigação:</strong>
-        <p style="font-size: 1.2em; font-weight: 600; color: #064e3b; margin-top: 8px; margin-bottom: 0;">"Existirá uma correlação estatística direta entre o volume de horas de estudo extraclasse e o rendimento académico real ou percebido pelos estudantes da UFOPA?"</p>
+    <!-- Slide 2: Contexto e Pergunta Central -->
+    <div class="slide">
+      <h2>O Problema</h2>
+      <p>A entrada na universidade exige que os alunos criem novas rotinas de estudo em casa. Sabemos que esses hábitos influenciam diretamente as notas.</p>
+      
+      <div class="box-insight" style="margin-top: 30px; padding: 25px;">
+        <strong style="font-size: 1em; text-transform: uppercase; letter-spacing: 1px; color: var(--success-color);">Pergunta Central da nossa Pesquisa:</strong>
+        <p style="font-size: 1.25em; font-weight: 600; color: #064e3b; margin-top: 10px; margin-bottom: 0;">"Estudar por mais horas garante mesmo notas melhores? Existe relação entre como o aluno estuda e o seu IRA?"</p>
       </div>
     </div>
 
-    <!-- Slide 3: Metodologia e Demografia -->
-    <div class="slide" contenteditable="true">
-      <h2>Desenho Metodológico e Perfil da Amostra</h2>
+    <!-- Slide 3: Objetivos da Pesquisa -->
+    <div class="slide">
+      <h2>O que queríamos descobrir?</h2>
+      <p style="font-size: 1.15em; margin-bottom: 25px;"><strong>Objetivo Principal:</strong> Entender matematicamente como os hábitos de estudo afetam o rendimento dos alunos do Campus Oriximiná.</p>
+      
+      <strong style="color: var(--accent-color); font-size: 1.1em; text-transform: uppercase;">Como fizemos isso (Passo a Passo):</strong>
+      <ul style="font-size: 1.1em; margin-top: 15px; line-height: 1.8;">
+        <li><strong>Coletar dados:</strong> Aplicar questionários aos alunos.</li>
+        <li><strong>Organizar:</strong> Separar dados em categorias numéricas e qualitativas.</li>
+        <li><strong>Calcular:</strong> Extrair médias, medianas e analisar a variação dos dados.</li>
+        <li><strong>Visualizar:</strong> Criar gráficos para encontrar padrões reais.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 4: Metodologia -->
+    <div class="slide">
+      <h2>Metodologia: Como a pesquisa foi feita</h2>
       <div class="slide-content-split">
         <div class="text-col">
-          <p><strong>Abordagem:</strong> Pesquisa quantitativa, descritiva e transversal realizada em setembro de 2026.</p>
-          <p><strong>Distribuição dos Cursos (<span class="counter" data-target="90">0</span> discentes):</strong></p>
-          <ul style="font-size: 1em; padding-left: 20px;">
-            <li>Sistemas de Informação: <strong>47 discentes</strong> (52,2%)</li>
-            <li>Ciências Biológicas: <strong>24 discentes</strong> (26,6%)</li>
-            <li>Ciência de Dados e I.A.: <strong>18 discentes</strong> (20,0%)</li>
+          <ul style="font-size: 1.1em; line-height: 1.8;">
+            <li><strong>Tipo de Estudo:</strong> Pesquisa quantitativa (focada em dados e números).</li>
+            <li><strong>Como perguntamos:</strong> Formulário online (Google Forms) em Setembro/2026.</li>
+            <li><strong>Quem respondeu:</strong> Alunos da comunidade académica local.</li>
           </ul>
         </div>
         <div class="graphic-col">
-          <div style="background: white; padding: 22px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-            <h3 style="color: var(--accent-color); margin-top: 0; font-size: 1.15em;">Fatores Contextuais e Triagem (CSV)</h3>
-            <p style="font-size: 1em; margin-bottom: 6px;">• <span class="highlight">Carga Laboral:</span> <span class="counter" data-target="55.5">0</span>% sem dedicação exclusiva (24 trabalham 40h, 10 freelancers, 6 em estágio).</p>
-            <p style="font-size: 1.0em; margin-bottom: 6px;">• <span class="highlight">Deslocamento:</span> <span class="counter" data-target="95">0</span>% gastam até 1 hora diária de percurso até ao campus.</p>
+          <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <h3 style="color: var(--accent-color); margin-top: 0; font-size: 1.15em;">Limpeza dos Dados (CSV)</h3>
+            <p style="font-size: 1.05em; margin-bottom: 10px;">Tivemos um total de <span class="counter" data-target="90" style="font-weight: 700;">0</span> respostas originais.</p>
+            <p style="font-size: 1.05em; margin-bottom: 10px; color: #dc2626;"><strong>Filtro de Qualidade:</strong> Removemos 1 resposta com erro óbvio no IRA para não estragar a média de toda a turma.</p>
+            <p style="font-size: 1.1em; font-weight: 700; color: var(--success-color);">Base de dados final: <span class="counter" data-target="89">0</span> respostas válidas.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 4: Gráfico 1 - Percepção e Dificuldade -->
-    <div class="slide" contenteditable="false">
-      <h2>A Dissonância da Autoeficácia e Dificuldade</h2>
+    <!-- Slide 5: Perfil dos Participantes (Parte 1) -->
+    <div class="slide">
+      <h2>Perfil dos Participantes: Cursos</h2>
       <div class="slide-content-split">
-        <div class="text-col" contenteditable="true">
-          <ul>
-            <li>A perceção normativa situa-se em <strong>Dentro do Esperado (<span class="counter" data-target="53.33">0</span>%)</strong>.</li>
-            <li><span style="color: #b91c1c; font-weight: 800;">Alerta Crítico:</span> Exatos <span class="counter" data-target="40">0</span>% avaliam o desempenho como deficitário (Abaixo ou Muito Abaixo).</li>
-            <li><strong>Fator Explicativo:</strong> 71% avaliam a dificuldade das disciplinas como <em>Média</em> e 17,7% como <em>Alta</em>.</li>
+        <div class="text-col">
+          <p style="font-size: 1.15em;">A nossa pesquisa focou-se fortemente na área de tecnologia e exatas:</p>
+          <ul style="font-size: 1.1em; padding-left: 20px; line-height: 2;">
+            <li>Sistemas de Informação: <strong><span class="counter" data-target="47">0</span> alunos</strong> (52,2%)</li>
+            <li>Ciências Biológicas: <strong><span class="counter" data-target="24">0</span> alunos</strong> (26,6%)</li>
+            <li>Ciência de Dados e I.A.: <strong><span class="counter" data-target="18">0</span> alunos</strong> (20,0%)</li>
           </ul>
-          <div class="box-alert" style="margin-top: 15px; font-size: 1em;">
-            <strong>Insight:</strong> Ocorre forte dissonância entre notas formais e autoeficácia sentida face à densidade tecnológica dos cursos.
+        </div>
+        <div class="graphic-col">
+          <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <h3 style="color: var(--success-color); margin-top: 0; font-size: 1.15em;">Dificuldade Percebida</h3>
+            <p style="font-size: 1.05em;">Como se tratam de cursos técnicos com muita matemática e lógica, a exigência é alta.</p>
+            <p style="font-size: 1.05em; margin-bottom: 0;"><strong>Nível das disciplinas:</strong> 71% dos alunos consideram o curso de nível <em>Médio</em> e 17,7% de nível <em>Alto</em>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Perfil dos Participantes (Parte 2) -->
+    <div class="slide">
+      <h2>Perfil dos Participantes: Rotina e Foco</h2>
+      <div class="slide-content-split">
+        <div class="text-col">
+          <p style="font-size: 1.1em;"><strong>Trabalho vs. Estudo:</strong></p>
+          <ul style="font-size: 1.1em; line-height: 1.8;">
+            <li>Apenas <strong><span class="counter" data-target="44.5">0</span>%</strong> se dedicam só aos estudos.</li>
+            <li><strong><span class="counter" data-target="55.5">0</span>%</strong> trabalham, fazem freelas ou estagiam.</li>
+          </ul>
+          <p style="font-size: 1em; color: var(--text-muted);">Isso significa que o tempo livre da maioria é curto.</p>
+        </div>
+        <div class="graphic-col">
+          <div style="background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.04);">
+            <h3 style="color: var(--accent-color); margin-top: 0; font-size: 1.15em;">Distrações Digitais</h3>
+            <p style="font-size: 1.05em;">• <span class="highlight">O Smartphone:</span> <span class="counter" data-target="70">0</span>% estudam com o telemóvel ao lado.</p>
+            <p style="font-size: 1.05em;">• Mais de 11% confessam interromper os estudos frequentemente para checar as redes sociais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Percepção dos Participantes -->
+    <div class="slide">
+      <h2>Como os alunos avaliam o próprio desempenho?</h2>
+      <div class="slide-content-split">
+        <div class="text-col">
+          <ul style="font-size: 1.1em; line-height: 1.8;">
+            <li>A maioria (<span class="counter" data-target="53.33">0</span>%) acha que o seu desempenho está "Dentro do Esperado".</li>
+            <li>Um número alto (<span class="highlight" style="background: #fee2e2; color: #b91c1c; font-weight: bold;"><span class="counter" data-target="40">0</span>%</span>) acha que está com <strong>notas más</strong> (Abaixo do esperado).</li>
+            <li>Quase ninguém (<span class="counter" data-target="6.66">0</span>%) sente que tem excelência.</li>
+          </ul>
+          <div class="box-alert" style="margin-top: 20px; font-size: 1.05em;">
+            <strong>Choque de Realidade:</strong> Os alunos sentem-se muito mais inseguros do que as suas verdadeiras notas institucionais revelam.
           </div>
         </div>
         <div class="graphic-col">
@@ -204,18 +235,40 @@
       </div>
     </div>
 
-    <!-- Slide 5: Centralidade e Hábitos Digitais -->
-    <div class="slide" contenteditable="false">
-      <h2>Métricas de Centralidade e Hábitos de Estudo</h2>
+    <!-- Slide 8: Formas Preferidas de Estudo -->
+    <div class="slide">
+      <h2>Como preferem estudar?</h2>
+      <div style="display: flex; gap: 20px; margin-top: 30px; margin-bottom: 30px; text-align: center;">
+        <div style="flex: 1; background: white; padding: 25px 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border-top: 6px solid var(--accent-color);">
+          <h3 style="margin: 0; color: var(--text-muted); font-size: 1em; text-transform: uppercase;">Sozinhos</h3>
+          <p style="font-size: 3em; font-weight: 800; color: var(--primary-color); margin: 15px 0;"><span class="counter" data-target="62.22">0</span>%</p>
+        </div>
+        <div style="flex: 1; background: white; padding: 25px 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border-top: 6px solid #10b981;">
+          <h3 style="margin: 0; color: var(--text-muted); font-size: 1em; text-transform: uppercase;">Em Grupo</h3>
+          <p style="font-size: 3em; font-weight: 800; color: var(--primary-color); margin: 15px 0;"><span class="counter" data-target="23.33">0</span>%</p>
+        </div>
+        <div style="flex: 1; background: white; padding: 25px 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border-top: 6px solid #f59e0b;">
+          <h3 style="margin: 0; color: var(--text-muted); font-size: 1em; text-transform: uppercase;">Em Dupla</h3>
+          <p style="font-size: 3em; font-weight: 800; color: var(--primary-color); margin: 15px 0;"><span class="counter" data-target="14.44">0</span>%</p>
+        </div>
+      </div>
+      <div class="box-insight" style="background: white; font-size: 1.1em;">
+        <strong>Conclusão Rápida:</strong> O aluno atual estuda isolado, focado em resolver listas e usando ferramentas como Inteligência Artificial. A falta de troca com colegas pode estar a gerar aquela insegurança vista no slide anterior.
+      </div>
+    </div>
+
+    <!-- Slide 9: Medidas de Centralidade -->
+    <div class="slide">
+      <h2>A Média da Turma (Centralidade)</h2>
       <div class="slide-content-split">
-        <div class="text-col" contenteditable="true">
+        <div class="text-col">
           <table>
-            <tr><th>Variável</th><th>Média</th><th>Mediana</th><th>Moda</th></tr>
-            <tr><td><strong>Tempo (Horas)</strong></td><td>3,06 h</td><td>3,00 h</td><td>2 e 3 horas</td></tr>
-            <tr><td><strong>Rendimento (IRA)</strong></td><td>8,33</td><td>8,41</td><td>8,50</td></tr>
+            <tr><th>O que medimos</th><th>Média geral</th><th>Mais comum (Moda)</th></tr>
+            <tr><td><strong>Tempo em casa</strong></td><td>3 horas/sem</td><td>2 a 3 horas</td></tr>
+            <tr><td><strong>Nota final (IRA)</strong></td><td>8,33</td><td>8,50</td></tr>
           </table>
-          <p style="margin-top: 15px; font-size: 1em; color: var(--text-muted); border-left: 4px solid var(--accent-color); padding-left: 10px;">
-            <strong>Hábito Digital:</strong> <span class="counter" data-target="70">0</span>% mantêm o smartphone por perto durante o estudo (olhando em pausas), e 11,1% interrompem frequentemente.
+          <p style="margin-top: 25px; font-size: 1.1em; color: var(--text-muted); border-left: 4px solid var(--accent-color); padding-left: 15px;">
+            Olhando para as médias, a turma estuda um tempo considerado "baixo/médio" (cerca de 3h semanais fora da aula), <strong>mas as notas são altas!</strong> A média de IRA é 8,33.
           </p>
         </div>
         <div class="graphic-col">
@@ -224,46 +277,41 @@
       </div>
     </div>
 
-    <!-- Slide 6: Dispersão Real CSV -->
-    <div class="slide" contenteditable="true">
-      <h2>Parâmetros de Dispersão e Variabilidade</h2>
-      <p style="margin-bottom: 12px;">Comparações estatísticas avançadas extraídas da base validada do inquérito:</p>
+    <!-- Slide 10: Medidas de Dispersão -->
+    <div class="slide">
+      <h2>Variação dos Dados (Dispersão)</h2>
+      <p style="font-size: 1.1em; margin-bottom: 20px;">Até que ponto os alunos são diferentes uns dos outros?</p>
       <table>
         <tr>
-          <th>Indicador Estatístico</th>
-          <th>Variável: Tempo (Horas/Semana)</th>
-          <th>Variável: Rendimento (IRA)</th>
+          <th>Medida</th>
+          <th>Tempo (Horas/Semana)</th>
+          <th>Notas (IRA)</th>
         </tr>
         <tr>
-          <td><strong>Amplitude Amostral</strong></td>
-          <td><span class="highlight">4,00</span> (Intervalo: 1,0 a 5,0h)</td>
-          <td><span class="highlight">4,20</span> (Intervalo: 5,6 a 9,8)</td>
+          <td><strong>Amplitude</strong> (Diferença Mín - Máx)</td>
+          <td>4 horas (varia de 1 a 5h)</td>
+          <td>4,2 pontos (varia de 5,6 a 9,8)</td>
         </tr>
         <tr>
-          <td><strong>Variância Amostral</strong></td>
-          <td>1,82</td>
-          <td>0,67</td>
-        </tr>
-        <tr>
-          <td><strong>Desvio Padrão </strong></td>
-          <td>1,35</td>
-          <td><span style="color: var(--success-color); font-weight: 700;">0,82</span></td>
+          <td><strong>Desvio Padrão</strong> (O quanto varia da média)</td>
+          <td><span style="font-weight: 700; color: var(--primary-color);">1,35</span> (Varia bastante)</td>
+          <td><span style="color: var(--success-color); font-weight: 700;">0,82</span> (Varia pouco)</td>
         </tr>
       </table>
-      <div class="box-insight" style="margin-top: 15px; background: white; font-size: 1em;">
-        <strong>Leitura Matemática:</strong> A acentuada homogeneidade do IRA (\(S=0,82\)) colide com a dispersão do tempo de estudo (\(S=1,35\)), comprovando assimetria comportamental profunda.
+      <div class="box-insight" style="margin-top: 25px; background: white; font-size: 1.1em; line-height: 1.6;">
+        <strong>Conclusão Matemática:</strong> As notas dos alunos são muito parecidas (desvio baixo de 0,82). No entanto, o tempo que cada um estuda é muito diferente (desvio de 1,35). Ou seja, <strong>as horas não estão a ditar a nota.</strong>
       </div>
     </div>
 
-    <!-- Slide 7: Gráfico 3 - Dispersão -->
-    <div class="slide" contenteditable="false">
-      <h2>Análise de Correlação Bivariada (Horas vs. IRA)</h2>
+    <!-- Slide 11: Horas de Estudos X IRA -->
+    <div class="slide">
+      <h2>Tempo de Estudo vs. Nota Final (IRA)</h2>
       <div class="slide-content-split">
-        <div class="text-col" contenteditable="true">
-          <p>O diagrama de dispersão bivariada demonstra empiricamente a <strong>ausência de correlação linear forte</strong> entre as grandezas avaliadas.</p>
-          <div class="box-insight" style="margin-top: 15px; font-size: 1em;">
-            <strong style="color: var(--success-color); text-transform: uppercase;">Evidência Chave:</strong><br><br>
-            Estudantes com jornadas semanais enxutas (<span class="highlight">1 a 2 horas</span>) atingem o estrato de excelência (\(IRA > 9,0\)), equiparando-se perfeitamente aos pares que investem 5 horas.
+        <div class="text-col">
+          <p style="font-size: 1.1em; line-height: 1.6;">O gráfico ao lado cruza as horas de estudo com as notas. E a descoberta foi muito interessante:</p>
+          <div class="box-insight" style="margin-top: 20px; font-size: 1.1em; line-height: 1.6;">
+            <strong style="color: var(--success-color); text-transform: uppercase;">Não há relação direta!</strong><br><br>
+            Temos alunos que estudam apenas <span class="highlight">1 a 2 horas</span> por semana e conseguem notas de excelência (IRA > 9). Eles tiram a mesma nota de quem passa 5 horas a estudar.
           </div>
         </div>
         <div class="graphic-col">
@@ -272,68 +320,44 @@
       </div>
     </div>
 
-    <!-- Slide 8: Discussão e Comparações -->
-    <div class="slide" contenteditable="true">
-      <h2>Discussão Científica e Diálogo Teórico</h2>
-      <ul style="margin-top: 12px; font-size: 1.05em;">
-        <li style="margin-bottom: 10px;"><strong>Paradoxo Temporal:</strong> Os achados refutam o senso comum de linearidade temporal, alinhando-se às premissas de Souza e Mascarenhas (2024).</li>
-        <li style="margin-bottom: 10px;"><strong>O Peso Metodológico:</strong> Com <span class="counter" data-target="62.2">0</span>% a optarem pelo estudo individual, a eficiência cognitiva decorrente de ferramentas de suporte sobrepõe-se ao acúmulo de horas.</li>
-        <li><strong>Fatores Externos:</strong> A conciliação laboral de mais de metade da amostra molda uma gestão de tempo altamente pragmática.</li>
+    <!-- Slide 12: Discussão e Limitações -->
+    <div class="slide">
+      <h2>O que aprendemos com isto? (Discussão)</h2>
+      <ul style="margin-top: 15px; font-size: 1.15em; line-height: 1.7;">
+        <li style="margin-bottom: 15px;"><strong>Foco vale mais do que tempo:</strong> Usar métodos ativos (como resolver exercícios e usar a I.A.) pesa mais no resultado do que passar 5 horas a ler slides passivamente.</li>
+        <li style="margin-bottom: 15px;"><strong>A Síndrome do Impostor:</strong> Como os cursos de exatas são densos, os alunos acham que "não sabem nada", mesmo quando as notas institucionais provam o contrário.</li>
+        <li><strong>Limitações da Pesquisa:</strong> Baseamo-nos na sinceridade dos alunos (formulários) e num grupo específico, o que impede de afirmar que isto é verdade para todos os cursos da universidade.</li>
       </ul>
     </div>
 
-    <!-- Slide 9: Conclusões Analíticas -->
-    <div class="slide" contenteditable="true">
-      <h2>Síntese Conclusiva da Investigação</h2>
-      <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="background: var(--accent-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">1</div>
-          <p style="margin: 0; font-size: 1.05em;">A crença de que o volume bruto de tempo dedicado assegura superioridade académica revelou-se <strong>estatisticamente falaciosa</strong>.</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="background: var(--accent-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">2</div>
-          <p style="margin: 0; font-size: 1.05em;">O rendimento institucional (Média de 8,33) contrasta com a insegurança percetiva, sugerindo elevada autoexigência.</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="background: var(--success-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">3</div>
-          <p style="margin: 0; font-size: 1.05em;">O desenho transversal e o autorrelato impõem limites à generalização, abrindo portas para estudos longitudinais.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Slide 11: Referências -->
-    <div class="slide" contenteditable="true">
-      <h2>Referências Bibliográficas</h2>
-      <div style="font-size: 1em; line-height: 1.5; margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
-        <p style="margin: 0; padding-left: 20px; text-indent: -20px;"><strong>ANDRADE-VALLES, I. et al.</strong> Atitude, hábitos de estudo e rendimento académico: Abordagem desde a teoria da ação racional. <em>Enfermería Universitaria</em>, Cidade do México, v. 15, n. 4, 2018.</p>
-        <p style="margin: 0; padding-left: 20px; text-indent: -20px;"><strong>SOUZA, Jerson Sandro Santos De; MASCARENHAS, Suely Ap. do Nascimento.</strong> Atribuições causais para resultados acadêmicos e seus impactos diferenciais sobre os hábitos de estudo de estudantes universitários. <em>Revista Contexto & Educação</em>, Ijuí, v. 39, n. 121, p. 1-22, 2024.</p>
-      </div>
-    </div>
-
-    <!-- Slide 12: Encerramento -->
-    <div class="slide cover-slide" contenteditable="true" style="text-align: center; justify-content: center;">
-      <h1 style="font-size: 3.5em; margin-bottom: 12px;">MUITO OBRIGADO!</h1>
-      <p style="font-size: 1.3em; font-weight: 500;">O painel encontra-se aberto para arguição e perguntas da Banca.</p>
-      <div style="margin-top: 35px; display: flex; justify-content: center; gap: 12px;">
-        <span style="background: white; color: var(--primary-color); padding: 8px 18px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Probabilidade e Estatística</span>
-        <span style="background: white; color: var(--primary-color); padding: 8px 18px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Sistemas de Informação</span>
-      </div>
-      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #cbd5e1;">
-        <p style="color: var(--text-muted); font-size: 0.95em; font-weight: 700; letter-spacing: 2px;">UFOPA &mdash; Campus Oriximiná, 2026</p>
+    <!-- Slide 13: Conclusão e Agradecimentos -->
+    <div class="slide cover-slide" style="text-align: center; justify-content: center;">
+      <h2 style="justify-content: center; border: none; font-size: 2.2em; margin-bottom: 15px; color: var(--success-color);">Conclusão Final</h2>
+      <p style="font-size: 1.3em; font-weight: 500; max-width: 900px; margin: 0 auto 35px auto;">
+        A ideia de que "quem estuda mais horas tira melhores notas" mostrou-se falsa neste cenário. O rendimento alto é resultado da <strong>qualidade do método</strong> e não da exaustão.
+      </p>
+      
+      <h1 style="font-size: 3.5em; margin-bottom: 10px;">MUITO OBRIGADO!</h1>
+      <p style="font-size: 1.1em; color: var(--text-muted); margin-bottom: 30px;">Abrimos agora o espaço para as perguntas da Banca.</p>
+      
+      <div style="display: flex; justify-content: center; gap: 15px;">
+        <span style="background: white; color: var(--primary-color); padding: 8px 20px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Probabilidade e Estatística</span>
+        <span style="background: white; color: var(--primary-color); padding: 8px 20px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Bacharelado UFOPA</span>
       </div>
     </div>
 
   </div>
   
-  <div class="controls" contenteditable="false">
+  <div class="controls">
     <button id="btnPrev" onclick="prevSlide()" disabled>
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
     </button>
     <div class="dots-container" id="dotsContainer"></div>
     <button id="btnNext" onclick="nextSlide()">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
     </button>
     <button id="btnFullscreen" onclick="toggleFullScreen()" title="Ecrã Inteiro">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
     </button>
   </div>
 </div>
@@ -349,6 +373,7 @@
   const dotsContainer = document.getElementById('dotsContainer');
   const presentationContainer = document.getElementById('presentationContainer');
 
+  // Gerar os pontos de paginação dinamicamente para os 13 slides
   for (let i = 0; i < totalSlides; i++) {
     const dot = document.createElement('div');
     dot.classList.add('dot');
@@ -389,6 +414,7 @@
     }
   }
 
+  // Função de contagem animada
   function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -427,71 +453,80 @@
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.color = '#64748b';
 
-    // Gráfico 1
-    new Chart(document.getElementById('chartPercepcao').getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['Dentro do Esp.', 'Abaixo', 'Muito Abaixo', 'Excelente', 'Acima'],
-        datasets: [{
-          data: [48, 30, 6, 4, 2],
-          backgroundColor: ['#0f172a', '#64748b', '#ef4444', '#059669', '#2563eb'],
-          borderRadius: 4
-        }]
-      },
-      options: {
-        indexAxis: 'y', maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { x: { max: 50, grid: { color: '#f1f5f9' } }, y: { grid: { display: false } } }
-      }
-    });
-
-    // Gráfico 2
-    new Chart(document.getElementById('chartHoras').getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['1 Hora', '2 Horas', '3 Horas', '4 Horas', '5 Horas'],
-        datasets: [{
-          data: [13, 22, 21, 17, 16],
-          backgroundColor: 'rgba(37, 99, 235, 0.15)',
-          borderColor: '#2563eb',
-          borderWidth: 2, borderRadius: 4
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } }
-      }
-    });
-
-    // Gráfico 3
-    const rawCSVScatter = [
-      {x: 1, y: 7.8}, {x: 1, y: 9.12}, {x: 1, y: 8.93}, {x: 1, y: 7.4}, {x: 1, y: 8.07}, {x: 1, y: 9.28},
-      {x: 2, y: 8.7}, {x: 2, y: 8.2}, {x: 2, y: 7.6}, {x: 2, y: 8.12}, {x: 2, y: 7.81}, {x: 2, y: 8.45},
-      {x: 3, y: 5.6}, {x: 3, y: 9.08}, {x: 3, y: 7.8}, {x: 3, y: 8.42}, {x: 3, y: 8.44}, {x: 3, y: 8.92},
-      {x: 4, y: 8.4}, {x: 4, y: 9.15}, {x: 4, y: 8.62}, {x: 4, y: 8.06}, {x: 4, y: 8.46}, {x: 4, y: 8.64},
-      {x: 5, y: 7.8}, {x: 5, y: 7.5}, {x: 5, y: 8.15}, {x: 5, y: 7.75}, {x: 5, y: 8.59}, {x: 5, y: 9.8}
-    ];
-    
-    new Chart(document.getElementById('chartDispersao').getContext('2d'), {
-      type: 'scatter',
-      data: {
-        datasets: [{
-          data: rawCSVScatter,
-          backgroundColor: 'rgba(37, 99, 235, 0.7)',
-          borderColor: '#2563eb', borderWidth: 2,
-          pointRadius: 6, pointHoverRadius: 9
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { title: { display: true, text: 'Horas Semanais', font: { weight: 'bold' } }, min: 0.5, max: 5.5, grid: { color: '#f1f5f9' } },
-          y: { title: { display: true, text: 'Rendimento (IRA)', font: { weight: 'bold' } }, min: 5.0, max: 10.0, grid: { color: '#f1f5f9' } }
+    // Gráfico 1: Percepção
+    const ctxPercepcao = document.getElementById('chartPercepcao');
+    if (ctxPercepcao) {
+      new Chart(ctxPercepcao.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['Dentro do Esp.', 'Abaixo', 'Muito Abaixo', 'Excelente', 'Acima'],
+          datasets: [{
+            data: [48, 30, 6, 4, 2],
+            backgroundColor: ['#0f172a', '#64748b', '#ef4444', '#059669', '#2563eb'],
+            borderRadius: 4
+          }]
+        },
+        options: {
+          indexAxis: 'y', maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { max: 50, grid: { color: '#f1f5f9' } }, y: { grid: { display: false } } }
         }
-      }
-    });
+      });
+    }
+
+    // Gráfico 2: Histograma de Horas
+    const ctxHoras = document.getElementById('chartHoras');
+    if (ctxHoras) {
+      new Chart(ctxHoras.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['1 Hora', '2 Horas', '3 Horas', '4 Horas', '5 Horas'],
+          datasets: [{
+            data: [13, 22, 21, 17, 16],
+            backgroundColor: 'rgba(37, 99, 235, 0.15)',
+            borderColor: '#2563eb',
+            borderWidth: 2, borderRadius: 4
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } }
+        }
+      });
+    }
+
+    // Gráfico 3: Dispersão (Horas vs IRA)
+    const ctxDispersao = document.getElementById('chartDispersao');
+    if (ctxDispersao) {
+      const rawCSVScatter = [
+        {x: 1, y: 7.8}, {x: 1, y: 9.12}, {x: 1, y: 8.93}, {x: 1, y: 7.4}, {x: 1, y: 8.07}, {x: 1, y: 9.28},
+        {x: 2, y: 8.7}, {x: 2, y: 8.2}, {x: 2, y: 7.6}, {x: 2, y: 8.12}, {x: 2, y: 7.81}, {x: 2, y: 8.45},
+        {x: 3, y: 5.6}, {x: 3, y: 9.08}, {x: 3, y: 7.8}, {x: 3, y: 8.42}, {x: 3, y: 8.44}, {x: 3, y: 8.92},
+        {x: 4, y: 8.4}, {x: 4, y: 9.15}, {x: 4, y: 8.62}, {x: 4, y: 8.06}, {x: 4, y: 8.46}, {x: 4, y: 8.64},
+        {x: 5, y: 7.8}, {x: 5, y: 7.5}, {x: 5, y: 8.15}, {x: 5, y: 7.75}, {x: 5, y: 8.59}, {x: 5, y: 9.8}
+      ];
+      
+      new Chart(ctxDispersao.getContext('2d'), {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            data: rawCSVScatter,
+            backgroundColor: 'rgba(37, 99, 235, 0.7)',
+            borderColor: '#2563eb', borderWidth: 2,
+            pointRadius: 6, pointHoverRadius: 9
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { title: { display: true, text: 'Horas Semanais', font: { weight: 'bold' } }, min: 0.5, max: 5.5, grid: { color: '#f1f5f9' } },
+            y: { title: { display: true, text: 'Rendimento (IRA)', font: { weight: 'bold' } }, min: 5.0, max: 10.0, grid: { color: '#f1f5f9' } }
+          }
+        }
+      });
+    }
   });
 </script>
 </body>
