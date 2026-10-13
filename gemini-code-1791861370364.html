@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defesa de Projeto: Hábitos e Desempenho Académico - UFOPA</title>
+<!-- Importação do Chart.js para os gráficos nativos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Importação da Fonte Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-color: #0f172a;
+    --secondary-color: #f1f5f9;
+    --accent-color: #2563eb;
+    --success-color: #059669;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --bg-app: #020617;
+    --slide-bg: #ffffff;
+  }
+
+  body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg-app); 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    color: var(--text-main);
+    background-image: radial-gradient(circle at 100% 0%, #1e293b 0%, #020617 100%);
+  }
+
+  .slider-container { 
+    width: 1150px; 
+    height: 680px; 
+    overflow: hidden; 
+    position: relative; 
+    background: var(--slide-bg); 
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1); 
+    border-radius: 12px; 
+    transition: all 0.3s ease;
+  }
+  
+  .slider-container:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .progress-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px; z-index: 30;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), #38bdf8);
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slides { 
+    display: flex; height: 100%; 
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.2, 1); 
+  }
+
+  .slide { 
+    min-width: 100%; height: 100%; 
+    padding: 55px 75px 85px 75px; 
+    box-sizing: border-box; 
+    display: flex; flex-direction: column; justify-content: center; 
+    opacity: 0; transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .slide.active { opacity: 1; transform: translateY(0); }
+
+  .cover-slide {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    position: relative;
+  }
+
+  h1 { color: var(--primary-color); font-size: 2.8em; margin-bottom: 12px; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
+  h2 { color: var(--primary-color); font-size: 2em; margin-bottom: 20px; border-bottom: 3px solid var(--secondary-color); padding-bottom: 8px; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; gap: 12px; }
+  h2::before { content: ''; display: block; width: 6px; height: 28px; background-color: var(--accent-color); border-radius: 4px; }
+  
+  p, li { font-size: 1.1em; line-height: 1.55; margin-bottom: 10px; }
+  
+  .author-info { margin-top: 25px; border-left: 5px solid var(--accent-color); padding: 12px 18px; background: rgba(255,255,255,0.9); border-radius: 0 10px 10px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+  
+  /* Controles com Glassmorphism Avançado */
+  .controls { 
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); 
+    display: flex; gap: 15px; align-items: center; 
+    background: rgba(15, 23, 42, 0.75); padding: 8px 20px; border-radius: 100px; 
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); z-index: 20; 
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  
+  .dots-container { display: flex; gap: 6px; margin: 0 10px; align-items: center; }
+  .dot { width: 8px; height: 8px; background-color: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; transition: all 0.3s; }
+  .dot.active { background-color: #38bdf8; transform: scale(1.4); }
+  
+  button { background-color: transparent; color: white; border: none; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center; transition: all 0.2s; border-radius: 50%; width: 34px; height: 34px; }
+  button:hover:not(:disabled) { background-color: rgba(255,255,255,0.15); color: #38bdf8; transform: scale(1.1); }
+  button:disabled { color: rgba(255,255,255,0.2); cursor: not-allowed; }
+  
+  #btnFullscreen { position: absolute; right: -55px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+
+  /* Elementos de Conteúdo */
+  .slide-content-split { display: flex; gap: 35px; align-items: center; width: 100%; height: 100%; }
+  .text-col { flex: 1; }
+  .graphic-col { flex: 1.2; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+  
+  .highlight { font-weight: 700; color: var(--accent-color); background-color: #eff6ff; padding: 2px 6px; border-radius: 4px; }
+  
+  .box-alert { background-color: #fef2f2; padding: 14px; border-left: 6px solid #ef4444; border-radius: 6px; color: #991b1b; }
+  .box-insight { background-color: #f0fdf4; padding: 14px; border-left: 6px solid var(--success-color); border-radius: 6px; color: #065f46; }
+  
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 1em; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border-bottom: 1px solid #e2e8f0; padding: 12px 16px; text-align: left; }
+  th { background-color: #f8fafc; color: var(--primary-color); font-weight: 700; }
+  tr:last-child td { border-bottom: none; }
+  
+  .chart-container { position: relative; height: 340px; width: 100%; }
+  
+  .counter { display: inline-block; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="slider-container" id="presentationContainer">
+  <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div class="slides" id="slides">
+    
+    <!-- Slide 1: Capa -->
+    <div class="slide cover-slide active" contenteditable="true">
+      <div style="text-align: right; margin-bottom: 15px;">
+        <span style="background: var(--primary-color); color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.75em; text-transform: uppercase; letter-spacing: 2px;">UFOPA • Análise Estatística</span>
+      </div>
+      <h1>Hábitos de Estudo e<br>Desempenho Académico</h1>
+      <p style="font-size: 1.35em; color: var(--text-muted); font-weight: 400; max-width: 800px;">Defesa do trabalho final da disciplina de Probabilidade e Estatística</p>
+      <div class="author-info">
+        <p style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75em; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 6px;">Equipa de Investigação</p>
+        <p style="font-weight: 600; font-size: 1.1em; margin-bottom: 4px; color: var(--primary-color);">Caio Hugo Serrão Luz &bull; Gabriel Bentes Sena &bull; Juan Oliveira &bull; Josiel Santos</p>
+        <p style="font-size: 0.9em; color: var(--text-muted);">Campus Prof. Domingos Diniz, Oriximiná &mdash; 2026</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Problema e Contexto -->
+    <div class="slide" contenteditable="true">
+      <h2>Contexto e Formulação do Problema</h2>
+      <p>A transição para o ensino superior tecnológico exige a estruturação de rotinas extraclasse altamente eficientes. Fatores como o suporte tecnológico, a gestão do tempo e o nível de exigência das disciplinas moldam o sucesso discente.</p>
+      <p>A literatura <span class="highlight">(Andrade-Valles et al., 2018)</span> demonstra que os hábitos e atitudes de aprendizagem operam como eixos determinantes do rendimento.</p>
+      <div class="box-insight" style="margin-top: 20px; padding: 20px;">
+        <strong style="font-size: 1em; text-transform: uppercase; letter-spacing: 1px; color: var(--success-color);">Questão Central da Investigação:</strong>
+        <p style="font-size: 1.2em; font-weight: 600; color: #064e3b; margin-top: 8px; margin-bottom: 0;">"Existirá uma correlação estatística direta entre o volume de horas de estudo extraclasse e o rendimento académico real ou percebido pelos estudantes da UFOPA?"</p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Metodologia e Demografia -->
+    <div class="slide" contenteditable="true">
+      <h2>Desenho Metodológico e Perfil da Amostra</h2>
+      <div class="slide-content-split">
+        <div class="text-col">
+          <p><strong>Abordagem:</strong> Pesquisa quantitativa, descritiva e transversal realizada em setembro de 2026.</p>
+          <p><strong>Distribuição dos Cursos (<span class="counter" data-target="90">0</span> discentes):</strong></p>
+          <ul style="font-size: 1em; padding-left: 20px;">
+            <li>Sistemas de Informação: <strong>47 discentes</strong> (52,2%)</li>
+            <li>Ciências Biológicas: <strong>24 discentes</strong> (26,6%)</li>
+            <li>Ciência de Dados e I.A.: <strong>18 discentes</strong> (20,0%)</li>
+          </ul>
+        </div>
+        <div class="graphic-col">
+          <div style="background: white; padding: 22px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+            <h3 style="color: var(--accent-color); margin-top: 0; font-size: 1.15em;">Fatores Contextuais e Triagem (CSV)</h3>
+            <p style="font-size: 1em; margin-bottom: 6px;">• <span class="highlight">Carga Laboral:</span> <span class="counter" data-target="55.5">0</span>% sem dedicação exclusiva (24 trabalham 40h, 10 freelancers, 6 em estágio).</p>
+            <p style="font-size: 1.0em; margin-bottom: 6px;">• <span class="highlight">Deslocamento:</span> <span class="counter" data-target="95">0</span>% gastam até 1 hora diária de percurso até ao campus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Gráfico 1 - Percepção e Dificuldade -->
+    <div class="slide" contenteditable="false">
+      <h2>A Dissonância da Autoeficácia e Dificuldade</h2>
+      <div class="slide-content-split">
+        <div class="text-col" contenteditable="true">
+          <ul>
+            <li>A perceção normativa situa-se em <strong>Dentro do Esperado (<span class="counter" data-target="53.33">0</span>%)</strong>.</li>
+            <li><span style="color: #b91c1c; font-weight: 800;">Alerta Crítico:</span> Exatos <span class="counter" data-target="40">0</span>% avaliam o desempenho como deficitário (Abaixo ou Muito Abaixo).</li>
+            <li><strong>Fator Explicativo:</strong> 71% avaliam a dificuldade das disciplinas como <em>Média</em> e 17,7% como <em>Alta</em>.</li>
+          </ul>
+          <div class="box-alert" style="margin-top: 15px; font-size: 1em;">
+            <strong>Insight:</strong> Ocorre forte dissonância entre notas formais e autoeficácia sentida face à densidade tecnológica dos cursos.
+          </div>
+        </div>
+        <div class="graphic-col">
+          <div class="chart-container"><canvas id="chartPercepcao"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Centralidade e Hábitos Digitais -->
+    <div class="slide" contenteditable="false">
+      <h2>Métricas de Centralidade e Hábitos de Estudo</h2>
+      <div class="slide-content-split">
+        <div class="text-col" contenteditable="true">
+          <table>
+            <tr><th>Variável</th><th>Média</th><th>Mediana</th><th>Moda</th></tr>
+            <tr><td><strong>Tempo (Horas)</strong></td><td>3,06 h</td><td>3,00 h</td><td>2 e 3 horas</td></tr>
+            <tr><td><strong>Rendimento (IRA)</strong></td><td>8,33</td><td>8,41</td><td>8,50</td></tr>
+          </table>
+          <p style="margin-top: 15px; font-size: 1em; color: var(--text-muted); border-left: 4px solid var(--accent-color); padding-left: 10px;">
+            <strong>Hábito Digital:</strong> <span class="counter" data-target="70">0</span>% mantêm o smartphone por perto durante o estudo (olhando em pausas), e 11,1% interrompem frequentemente.
+          </p>
+        </div>
+        <div class="graphic-col">
+          <div class="chart-container"><canvas id="chartHoras"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Dispersão Real CSV -->
+    <div class="slide" contenteditable="true">
+      <h2>Parâmetros de Dispersão e Variabilidade</h2>
+      <p style="margin-bottom: 12px;">Comparações estatísticas avançadas extraídas da base validada do inquérito:</p>
+      <table>
+        <tr>
+          <th>Indicador Estatístico</th>
+          <th>Variável: Tempo (Horas/Semana)</th>
+          <th>Variável: Rendimento (IRA)</th>
+        </tr>
+        <tr>
+          <td><strong>Amplitude Amostral</strong></td>
+          <td><span class="highlight">4,00</span> (Intervalo: 1,0 a 5,0h)</td>
+          <td><span class="highlight">4,20</span> (Intervalo: 5,6 a 9,8)</td>
+        </tr>
+        <tr>
+          <td><strong>Variância Amostral</strong></td>
+          <td>1,82</td>
+          <td>0,67</td>
+        </tr>
+        <tr>
+          <td><strong>Desvio Padrão </strong></td>
+          <td>1,35</td>
+          <td><span style="color: var(--success-color); font-weight: 700;">0,82</span></td>
+        </tr>
+      </table>
+      <div class="box-insight" style="margin-top: 15px; background: white; font-size: 1em;">
+        <strong>Leitura Matemática:</strong> A acentuada homogeneidade do IRA (\(S=0,82\)) colide com a dispersão do tempo de estudo (\(S=1,35\)), comprovando assimetria comportamental profunda.
+      </div>
+    </div>
+
+    <!-- Slide 7: Gráfico 3 - Dispersão -->
+    <div class="slide" contenteditable="false">
+      <h2>Análise de Correlação Bivariada (Horas vs. IRA)</h2>
+      <div class="slide-content-split">
+        <div class="text-col" contenteditable="true">
+          <p>O diagrama de dispersão bivariada demonstra empiricamente a <strong>ausência de correlação linear forte</strong> entre as grandezas avaliadas.</p>
+          <div class="box-insight" style="margin-top: 15px; font-size: 1em;">
+            <strong style="color: var(--success-color); text-transform: uppercase;">Evidência Chave:</strong><br><br>
+            Estudantes com jornadas semanais enxutas (<span class="highlight">1 a 2 horas</span>) atingem o estrato de excelência (\(IRA > 9,0\)), equiparando-se perfeitamente aos pares que investem 5 horas.
+          </div>
+        </div>
+        <div class="graphic-col">
+          <div class="chart-container"><canvas id="chartDispersao"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Discussão e Comparações -->
+    <div class="slide" contenteditable="true">
+      <h2>Discussão Científica e Diálogo Teórico</h2>
+      <ul style="margin-top: 12px; font-size: 1.05em;">
+        <li style="margin-bottom: 10px;"><strong>Paradoxo Temporal:</strong> Os achados refutam o senso comum de linearidade temporal, alinhando-se às premissas de Souza e Mascarenhas (2024).</li>
+        <li style="margin-bottom: 10px;"><strong>O Peso Metodológico:</strong> Com <span class="counter" data-target="62.2">0</span>% a optarem pelo estudo individual, a eficiência cognitiva decorrente de ferramentas de suporte sobrepõe-se ao acúmulo de horas.</li>
+        <li><strong>Fatores Externos:</strong> A conciliação laboral de mais de metade da amostra molda uma gestão de tempo altamente pragmática.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 9: Conclusões Analíticas -->
+    <div class="slide" contenteditable="true">
+      <h2>Síntese Conclusiva da Investigação</h2>
+      <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">1</div>
+          <p style="margin: 0; font-size: 1.05em;">A crença de que o volume bruto de tempo dedicado assegura superioridade académica revelou-se <strong>estatisticamente falaciosa</strong>.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">2</div>
+          <p style="margin: 0; font-size: 1.05em;">O rendimento institucional (Média de 8,33) contrasta com a insegurança percetiva, sugerindo elevada autoexigência.</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--success-color); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9em;">3</div>
+          <p style="margin: 0; font-size: 1.05em;">O desenho transversal e o autorrelato impõem limites à generalização, abrindo portas para estudos longitudinais.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 11: Referências -->
+    <div class="slide" contenteditable="true">
+      <h2>Referências Bibliográficas</h2>
+      <div style="font-size: 1em; line-height: 1.5; margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+        <p style="margin: 0; padding-left: 20px; text-indent: -20px;"><strong>ANDRADE-VALLES, I. et al.</strong> Atitude, hábitos de estudo e rendimento académico: Abordagem desde a teoria da ação racional. <em>Enfermería Universitaria</em>, Cidade do México, v. 15, n. 4, 2018.</p>
+        <p style="margin: 0; padding-left: 20px; text-indent: -20px;"><strong>SOUZA, Jerson Sandro Santos De; MASCARENHAS, Suely Ap. do Nascimento.</strong> Atribuições causais para resultados acadêmicos e seus impactos diferenciais sobre os hábitos de estudo de estudantes universitários. <em>Revista Contexto & Educação</em>, Ijuí, v. 39, n. 121, p. 1-22, 2024.</p>
+      </div>
+    </div>
+
+    <!-- Slide 12: Encerramento -->
+    <div class="slide cover-slide" contenteditable="true" style="text-align: center; justify-content: center;">
+      <h1 style="font-size: 3.5em; margin-bottom: 12px;">MUITO OBRIGADO!</h1>
+      <p style="font-size: 1.3em; font-weight: 500;">O painel encontra-se aberto para arguição e perguntas da Banca.</p>
+      <div style="margin-top: 35px; display: flex; justify-content: center; gap: 12px;">
+        <span style="background: white; color: var(--primary-color); padding: 8px 18px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Probabilidade e Estatística</span>
+        <span style="background: white; color: var(--primary-color); padding: 8px 18px; border-radius: 50px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 0.9em;">Sistemas de Informação</span>
+      </div>
+      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #cbd5e1;">
+        <p style="color: var(--text-muted); font-size: 0.95em; font-weight: 700; letter-spacing: 2px;">UFOPA &mdash; Campus Oriximiná, 2026</p>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class="controls" contenteditable="false">
+    <button id="btnPrev" onclick="prevSlide()" disabled>
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+    <div class="dots-container" id="dotsContainer"></div>
+    <button id="btnNext" onclick="nextSlide()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+    </button>
+    <button id="btnFullscreen" onclick="toggleFullScreen()" title="Ecrã Inteiro">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slideElements = document.querySelectorAll('.slide');
+  const totalSlides = slideElements.length;
+  const slidesContainer = document.getElementById('slides');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const progressBar = document.getElementById('progressBar');
+  const dotsContainer = document.getElementById('dotsContainer');
+  const presentationContainer = document.getElementById('presentationContainer');
+
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+  const dots = document.querySelectorAll('.dot');
+
+  function updateUI() {
+    slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+    progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+    
+    slideElements.forEach((el, index) => {
+      el.classList.toggle('active', index === currentSlide);
+      dots[index].classList.toggle('active', index === currentSlide);
+    });
+    
+    btnPrev.disabled = currentSlide === 0;
+    btnNext.disabled = currentSlide === totalSlides - 1;
+
+    runCountersInActiveSlide();
+  }
+
+  function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateUI(); } }
+  function prevSlide() { if (currentSlide > 0) { currentSlide--; updateUI(); } }
+  function goToSlide(index) { currentSlide = index; updateUI(); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      presentationContainer.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const currentVal = (progress * (end - start) + start);
+      
+      if (end % 1 !== 0) {
+        obj.innerHTML = currentVal.toFixed(1).replace('.', ',');
+      } else {
+        obj.innerHTML = Math.floor(currentVal);
+      }
+      
+      if (progress < 1) window.requestAnimationFrame(step);
+      else obj.innerHTML = end % 1 !== 0 ? end.toFixed(1).replace('.', ',') : end;
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  function runCountersInActiveSlide() {
+    const activeCounters = slideElements[currentSlide].querySelectorAll('.counter');
+    activeCounters.forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      if (!counter.classList.contains('animated')) {
+        animateValue(counter, 0, target, 1500);
+        counter.classList.add('animated');
+      }
+    });
+  }
+
+  updateUI();
+
+  // Renderização Chart.js
+  document.addEventListener('DOMContentLoaded', function() {
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#64748b';
+
+    // Gráfico 1
+    new Chart(document.getElementById('chartPercepcao').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Dentro do Esp.', 'Abaixo', 'Muito Abaixo', 'Excelente', 'Acima'],
+        datasets: [{
+          data: [48, 30, 6, 4, 2],
+          backgroundColor: ['#0f172a', '#64748b', '#ef4444', '#059669', '#2563eb'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y', maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { max: 50, grid: { color: '#f1f5f9' } }, y: { grid: { display: false } } }
+      }
+    });
+
+    // Gráfico 2
+    new Chart(document.getElementById('chartHoras').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['1 Hora', '2 Horas', '3 Horas', '4 Horas', '5 Horas'],
+        datasets: [{
+          data: [13, 22, 21, 17, 16],
+          backgroundColor: 'rgba(37, 99, 235, 0.15)',
+          borderColor: '#2563eb',
+          borderWidth: 2, borderRadius: 4
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } }
+      }
+    });
+
+    // Gráfico 3
+    const rawCSVScatter = [
+      {x: 1, y: 7.8}, {x: 1, y: 9.12}, {x: 1, y: 8.93}, {x: 1, y: 7.4}, {x: 1, y: 8.07}, {x: 1, y: 9.28},
+      {x: 2, y: 8.7}, {x: 2, y: 8.2}, {x: 2, y: 7.6}, {x: 2, y: 8.12}, {x: 2, y: 7.81}, {x: 2, y: 8.45},
+      {x: 3, y: 5.6}, {x: 3, y: 9.08}, {x: 3, y: 7.8}, {x: 3, y: 8.42}, {x: 3, y: 8.44}, {x: 3, y: 8.92},
+      {x: 4, y: 8.4}, {x: 4, y: 9.15}, {x: 4, y: 8.62}, {x: 4, y: 8.06}, {x: 4, y: 8.46}, {x: 4, y: 8.64},
+      {x: 5, y: 7.8}, {x: 5, y: 7.5}, {x: 5, y: 8.15}, {x: 5, y: 7.75}, {x: 5, y: 8.59}, {x: 5, y: 9.8}
+    ];
+    
+    new Chart(document.getElementById('chartDispersao').getContext('2d'), {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          data: rawCSVScatter,
+          backgroundColor: 'rgba(37, 99, 235, 0.7)',
+          borderColor: '#2563eb', borderWidth: 2,
+          pointRadius: 6, pointHoverRadius: 9
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { title: { display: true, text: 'Horas Semanais', font: { weight: 'bold' } }, min: 0.5, max: 5.5, grid: { color: '#f1f5f9' } },
+          y: { title: { display: true, text: 'Rendimento (IRA)', font: { weight: 'bold' } }, min: 5.0, max: 10.0, grid: { color: '#f1f5f9' } }
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
