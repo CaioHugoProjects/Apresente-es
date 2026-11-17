@@ -141,7 +141,7 @@
 
         .progress-fill {
             height: 100%;
-            width: 12.5%;
+            width: 11.1%;
             background: linear-gradient(90deg, var(--imperial-bright), var(--gold));
             box-shadow: 0 0 12px var(--gold-glow);
             transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -484,7 +484,20 @@
             border-color: var(--gold-light);
         }
 
-        /* Slide 6: Métricas */
+        /* Slide 6: Financeiro em Planejamento */
+        .plan-badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(245, 158, 11, 0.16);
+            color: var(--gold-light);
+            border: 1px solid var(--border-gold);
+            margin-bottom: 10px;
+        }
+
+        /* Slide 7: Métricas */
         .metric-card {
             background: linear-gradient(160deg, var(--surface-elevated), var(--surface));
             border: 1px solid var(--border-gold);
@@ -518,7 +531,7 @@
             transition: width 1s ease;
         }
 
-        /* Slide 7: Proposta de Valor */
+        /* Slide 8: Proposta de Valor */
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -715,7 +728,7 @@
             <span>Clínica Monad • Engenharia de Sistema</span>
         </div>
         <div class="topbar-actions">
-            <span id="slide-counter" style="font-size: 12px; color: var(--gold-light); font-weight: 700; margin-right: 6px;">01 / 08</span>
+            <span id="slide-counter" style="font-size: 12px; color: var(--gold-light); font-weight: 700; margin-right: 6px;">01 / 09</span>
             <button class="pill-btn" onclick="toggleDrawer()" title="Índice de Slides (Tecla M)">☰ Índice</button>
             <button class="pill-btn" onclick="toggleFullScreen()" title="Tela Cheia (Tecla F)">⛶ Tela Cheia</button>
         </div>
@@ -735,7 +748,7 @@
                     <div class="kicker">⚡ Entrega Técnica & Operacional</div>
                     <h1 class="slide-title">Sistema Integrado de <span class="gold">Gestão Ocupacional</span> & Fluxo Clínico</h1>
                     <p class="slide-subtitle">
-                        Plataforma web desenvolvida sob medida para a <strong>Clínica Monad</strong>, conectando recepção, setores técnicos, painel de chamadas, controle administrativo e geração automatizada de ASO, Prontuário e Avaliação Psicossocial.
+                        Plataforma web desenvolvida sob medida para a <strong>Clínica Monad</strong>, conectando recepção, setores técnicos, painel de chamadas, controle administrativo, geração automatizada de ASO e futura gestão financeira.
                     </p>
                     <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
                         <button class="cta-primary" onclick="nextSlide()">Iniciar Apresentação ➔</button>
@@ -839,14 +852,46 @@
                 <button class="role-btn active" onclick="selectRole('recepcao', this)">🏢 Recepção</button>
                 <button class="role-btn" onclick="selectRole('setores', this)">🩺 Setores Técnicos</button>
                 <button class="role-btn" onclick="selectRole('gestao', this)">📊 Visão Geral & ASO</button>
-                <button class="role-btn" onclick="selectRole('admin', this)">👑 Painel Admin</button>
+                <button class="role-btn" onclick="selectRole('admin', this)">👑 Painel Admin & Financeiro</button>
             </div>
 
             <div class="grid-2" id="role-details"></div>
         </section>
 
-        <!-- SLIDE 6: IMPACTO E RESULTADOS -->
-        <section class="slide" data-title="06. Impacto e Ganhos">
+        <!-- SLIDE 6: MÓDULO FINANCEIRO EM PLANEJAMENTO -->
+        <section class="slide" data-title="06. Módulo Financeiro (Roadmap)">
+            <div class="kicker">🗓️ Próxima Evolução • Em Planejamento</div>
+            <h2 class="slide-title">Aba Financeira & <span class="gold">Faturamento Empresarial</span></h2>
+            <p class="slide-subtitle">Módulo exclusivo para a administração consolidar atendimentos por empresa e período, precificar exames e exportar planilhas prontas para cobrança.</p>
+
+            <div class="grid-3" style="margin-bottom: 20px;">
+                <div class="tech-card gold-accent">
+                    <span class="plan-badge">Etapa 01 • Filtro</span>
+                    <h3>🏢 Empresa & Período</h3>
+                    <p>Seleção da empresa cliente e intervalo de datas (<code>dd/mm/aaaa</code> a <code>dd/mm/aaaa</code>) buscando diretamente na base de atendimentos e exames extras.</p>
+                </div>
+                <div class="tech-card imperial-accent">
+                    <span class="plan-badge">Etapa 02 • Precificação</span>
+                    <h3>💲 Modal de Valores</h3>
+                    <p>Abertura automática de modal zerado listando os exames realizados no período para inserção rápida dos valores unitários cobrados daquela empresa.</p>
+                </div>
+                <div class="tech-card gold-accent">
+                    <span class="plan-badge">Etapa 03 • Relatório</span>
+                    <h3>📊 Desmembramento & Excel</h3>
+                    <p>Tabela titulada <strong>Faturamento "Empresa"</strong> listando cada exame em linha individual (Data, Nome, CPF, DN, Exame e Valor) com exportação direta em <code>.xlsx</code>.</p>
+                </div>
+            </div>
+
+            <div class="tech-card imperial-accent" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h3 style="color: var(--gold-light);">🔒 Acesso Restrito ao Perfil Administrador</h3>
+                    <p>Visibilidade controlada exclusivamente para o usuário <strong>Admin</strong>, integrando os exames padrão e os exames extras registrados na emissão do ASO.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: IMPACTO E RESULTADOS -->
+        <section class="slide" data-title="07. Impacto e Ganhos">
             <div class="kicker">📈 Valor Entregue</div>
             <h2 class="slide-title">Ganhos Diretos para a <span class="gold">Clínica Monad</span></h2>
             <p class="slide-subtitle">Benefícios operacionais consolidados com a implantação da plataforma.</p>
@@ -886,8 +931,8 @@
             </div>
         </section>
 
-        <!-- SLIDE 7: PROPOSTA DE VALOR -->
-        <section class="slide" data-title="07. Proposta de Valor">
+        <!-- SLIDE 8: PROPOSTA DE VALOR -->
+        <section class="slide" data-title="08. Proposta de Valor">
             <div class="kicker">💎 Investimento & Retorno</div>
             <h2 class="slide-title">Proposta de Valor & <span class="gold">Modelos de Contratação</span></h2>
             <p class="slide-subtitle">Solução desenvolvida exclusivamente para a realidade operacional da Clínica Monad — sem limites por usuário e com 100% de aderência ao fluxo da clínica.</p>
@@ -921,8 +966,8 @@
             </div>
         </section>
 
-        <!-- SLIDE 8: ENCERRAMENTO -->
-        <section class="slide" data-title="08. Conclusão">
+        <!-- SLIDE 9: ENCERRAMENTO -->
+        <section class="slide" data-title="09. Conclusão">
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 780px; width: 100%; margin: 0 auto;">
                 <div class="hero-logo-wrapper" style="display: flex; align-items: center; justify-content: center; margin: 0 auto 22px auto; padding: 16px 24px;">
                     <img src="logo monad.png" alt="Clínica Monad" style="max-width: 165px; height: auto; display: block;">
@@ -930,11 +975,11 @@
                 <div class="kicker" style="margin: 0 auto 14px auto;">🚀 Sistema Pronto para Operação</div>
                 <h2 class="slide-title" style="text-align: center;">Obrigado pela Confiança, <span class="gold">Clínica Monad</span></h2>
                 <p class="slide-subtitle" style="margin: 0 auto 28px auto; text-align: center;">
-                    O ecossistema encontra-se estruturado, integrado ao banco de dados e alinhado às rotinas de Medicina e Segurança do Trabalho. Estamos à disposição para demonstração prática ao vivo e fechamento da proposta.
+                    O ecossistema encontra-se estruturado, integrado ao banco de dados e alinhado às rotinas de Medicina e Segurança do Trabalho — pronto para evoluir com a nova Aba Financeira.
                 </p>
                 <div style="display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; width: 100%;">
                     <button class="cta-primary" onclick="goToSlide(0)">↺ Reiniciar Apresentação</button>
-                    <button class="pill-btn" style="padding: 13px 22px; font-size: 14px; border-color: var(--gold);" onclick="goToSlide(6)">💎 Rever Proposta de Valor</button>
+                    <button class="pill-btn" style="padding: 13px 22px; font-size: 14px; border-color: var(--gold);" onclick="goToSlide(7)">💎 Rever Proposta de Valor</button>
                 </div>
             </div>
         </section>
@@ -996,7 +1041,7 @@
             document.getElementById('btn-prev').disabled = currentIndex === 0;
             document.getElementById('btn-next').disabled = currentIndex === slides.length - 1;
 
-            if (currentIndex === 5) animateMetrics();
+            if (currentIndex === 6) animateMetrics();
         }
 
         function goToSlide(index) {
@@ -1130,7 +1175,7 @@
         const roleData = {
             recepcao: [
                 { title: 'Check-in & Agendamento (index.html)', desc: 'Cadastro rápido de colaboradores, seleção de exames por categoria (Clínico, RX, Lab, Fono, Médico, Psicossocial), validação de CPF e recepção de avisos de chamada.' },
-                { title: 'Reimpressão & Agendados (reimpressao.html)', desc: 'Consulta rápida de fichas emitidas e gestão de colaboradores agendados para datas futuras.' }
+                { title: 'Reimpressão & Agendados (reimpressao.html)', desc: 'Consulta rápida de fichas emitidas e gestão de colaboradores agendados para datas futuras com atualização a cada 3 segundos.' }
             ],
             setores: [
                 { title: 'Painel Técnico Dedicado (setor.html)', desc: 'Visualização filtrada exclusivamente para os pacientes do setor logado (Clínico, Raio-X, Fono ou Laboratório) com RG, Função e Data de Nascimento.' },
@@ -1141,8 +1186,8 @@
                 { title: 'Gerador de ASO & Base de Dados', desc: 'Emissão de ASO, Prontuário e Avaliação Psicossocial (documentos.html) e manutenção de empresas, funções e exames (cadastros.html).' }
             ],
             admin: [
-                { title: 'Supervisão Total (admin.html)', desc: 'Acesso irrestrito a todo o histórico por Nome, CPF, Empresa ou Data de Cadastro, com edição completa de registros e datas.' },
-                { title: 'Controle e Integridade', desc: 'Permissão exclusiva para exclusão definitiva de registros, alteração forçada de status por setor e correção de exames extras.' }
+                { title: 'Supervisão Total (admin.html)', desc: 'Acesso irrestrito a todo o histórico por Nome, CPF, Empresa ou Data de Cadastro, com edição completa de registros, exclusões e exames extras.' },
+                { title: 'Aba Financeira • Em Planejamento (financeiro.html)', desc: 'Módulo exclusivo do Admin para faturamento por empresa e período, precificação individualizada de exames e exportação direta em planilha Excel (.xlsx).' }
             ]
         };
 
@@ -1158,7 +1203,7 @@
         }
         selectRole('recepcao');
 
-        // SLIDE 6: Animação de Contadores
+        // SLIDE 7: Animação de Contadores
         function animateMetrics() {
             document.querySelectorAll('.metric-value').forEach(el => {
                 const target = parseInt(el.dataset.target, 10);
@@ -1180,7 +1225,7 @@
             });
         }
 
-        // SLIDE 7: Destaque visual nos cards de proposta
+        // SLIDE 8: Destaque visual nos cards de proposta
         function selectPricingPlan(card) {
             document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('featured'));
             card.classList.add('featured');
