@@ -1086,7 +1086,7 @@
         const compareData = {
             depois: [
                 { icon: '⚡', title: 'Check-in Digital Centralizado', desc: 'Cadastro único na recepção com validação de CPF, máscaras automáticas e distribuição imediata para cada setor.', accent: 'gold-accent' },
-                { icon: '📡', title: 'Rastreamento a Cada 3 Segundos', desc: 'Cada profissional marca a conclusão no seu painel e a recepção acompanha o progresso global quase instantaneamente.', accent: 'imperial-accent' },
+                { icon: '📡', title: 'Rastreamento a Cada 1 Segundos', desc: 'Cada profissional marca a conclusão no seu painel e a recepção acompanha o progresso global quase instantaneamente.', accent: 'imperial-accent' },
                 { icon: '📑', title: 'ASO & e-Social Automatizados', desc: 'Puxa riscos PGR da função/empresa, códigos e-Social, datas individuais de exames e imprime tudo pronto em A4.', accent: 'gold-accent' }
             ],
             antes: [
@@ -1113,7 +1113,7 @@
         const archDetails = [
             { title: 'CAMADA 01 // FRONTEND & INTERFACE RESPONSIVA', code: '• HTML5 Semântico + CSS Variables (Suporte nativo a Light/Dark Mode)\n• Layout adaptável para Desktops de recepção, Tablets e Smartphones\n• Máscaras inteligentes de entrada (CPF com dígito verificador, Telefone e Datas BR)' },
             { title: 'CAMADA 02 // CONTROLE DE ACESSO & GATEKEEPER', code: '• Autenticação por sessão e roteamento automático por setor (monad_setor)\n• Bloqueio de acesso cruzado entre perfis (Recepção, Setores, Geral e Admin)\n• Exclusão e edição avançada restritas exclusivamente ao Painel Administrativo' },
-            { title: 'CAMADA 03 // PERSISTÊNCIA & SINCRONIZAÇÃO SUPABASE (3s)', code: '• Banco PostgreSQL estruturado (atendimentos, empresas_base, funcoes_base, esocial_exames)\n• Polling silencioso de alta frequência (a cada 3 segundos) sem perda de foco ou digitação\n• Fila de chamadas em tempo real (tabela chamadas) integrada ao painel da recepção' },
+            { title: 'CAMADA 03 // PERSISTÊNCIA & SINCRONIZAÇÃO SUPABASE (1s)', code: '• Banco PostgreSQL estruturado (atendimentos, empresas_base, funcoes_base, esocial_exames)\n• Polling silencioso de alta frequência (a cada 1 segundos) sem perda de foco ou digitação\n• Fila de chamadas em tempo real (tabela chamadas) integrada ao painel da recepção' },
             { title: 'CAMADA 04 // MOTOR DE IMPRESSÃO DOCUMENTAL A4', code: '• Media Queries @media print calibradas em milímetros (210mm × 297mm)\n• Emissão simultânea: ASO (1ª e 2ª Via), Prontuário Médico e Avaliação Psicossocial\n• Suporte a datas individuais por exame e gravação de exames extras no atendimento' }
         ];
 
@@ -1175,14 +1175,14 @@
         const roleData = {
             recepcao: [
                 { title: 'Check-in & Agendamento (index.html)', desc: 'Cadastro rápido de colaboradores, seleção de exames por categoria (Clínico, RX, Lab, Fono, Médico, Psicossocial), validação de CPF e recepção de avisos de chamada.' },
-                { title: 'Reimpressão & Agendados (reimpressao.html)', desc: 'Consulta rápida de fichas emitidas e gestão de colaboradores agendados para datas futuras com atualização a cada 3 segundos.' }
+                { title: 'Reimpressão & Agendados (reimpressao.html)', desc: 'Consulta rápida de fichas emitidas e gestão de colaboradores agendados para datas futuras com atualização a cada 1 segundos.' }
             ],
             setores: [
                 { title: 'Painel Técnico Dedicado (setor.html)', desc: 'Visualização filtrada exclusivamente para os pacientes do setor logado (Clínico, Raio-X, Fono ou Laboratório) com RG, Função e Data de Nascimento.' },
                 { title: 'Recursos Específicos por Área', desc: 'Laboratório conta com campo de observação de coleta e Relação de Envio; Consultório Médico conta com botão de Chamada Sonora na Recepção.' }
             ],
             gestao: [
-                { title: 'Visão Geral Global (checkin.html)', desc: 'Acompanhamento consolidado de todos os setores a cada 3 segundos, com filtro por aba e status global (Em Atendimento / Concluído).' },
+                { title: 'Visão Geral Global (checkin.html)', desc: 'Acompanhamento consolidado de todos os setores a cada 1 segundos, com filtro por aba e status global (Em Atendimento / Concluído).' },
                 { title: 'Gerador de ASO & Base de Dados', desc: 'Emissão de ASO, Prontuário e Avaliação Psicossocial (documentos.html) e manutenção de empresas, funções e exames (cadastros.html).' }
             ],
             admin: [
