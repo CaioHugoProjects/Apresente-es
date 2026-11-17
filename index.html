@@ -222,7 +222,7 @@
             color: var(--text-muted);
             max-width: 780px;
             line-height: 1.5;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
 
         /* Slide 1: Capa */
@@ -420,86 +420,7 @@
             font-family: 'Consolas', 'Courier New', monospace;
         }
 
-        /* Interação Slide 4: Simulador Ao Vivo do Fluxo */
-        .sim-box {
-            background: var(--surface);
-            border: 1px solid var(--border-gold);
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
-        }
-
-        .sim-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border-subtle);
-            margin-bottom: 18px;
-        }
-
-        .sim-status-pill {
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--warning);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-        }
-
-        .sim-status-pill.done {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-            border-color: rgba(16, 185, 129, 0.4);
-        }
-
-        .sim-sectors {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .sim-sector-card {
-            background: var(--bg-deep);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 14px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .sim-sector-card:hover {
-            border-color: var(--imperial-bright);
-        }
-
-        .sim-sector-card.checked {
-            border-color: var(--success);
-            background: rgba(16, 185, 129, 0.08);
-        }
-
-        .sim-log {
-            background: #05080f;
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 10px 14px;
-            font-family: 'Consolas', monospace;
-            font-size: 12px;
-            color: var(--gold-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* Interação Slide 5: Explorador ASO & e-Social */
+        /* Interação Slide 4: Explorador ASO & e-Social */
         .aso-explorer {
             display: grid;
             grid-template-columns: 0.9fr 1.1fr;
@@ -537,7 +458,7 @@
             padding: 22px;
         }
 
-        /* Interação Slide 6: RBAC Perfis */
+        /* Interação Slide 5: RBAC Perfis */
         .role-pills {
             display: flex;
             gap: 10px;
@@ -563,7 +484,7 @@
             border-color: var(--gold-light);
         }
 
-        /* Slide 7: Métricas */
+        /* Slide 6: Métricas */
         .metric-card {
             background: linear-gradient(160deg, var(--surface-elevated), var(--surface));
             border: 1px solid var(--border-gold);
@@ -595,6 +516,78 @@
             width: 0%;
             background: linear-gradient(90deg, var(--imperial-bright), var(--gold));
             transition: width 1s ease;
+        }
+
+        /* Slide 7: Proposta de Valor */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(160deg, var(--surface-elevated), var(--bg-deep));
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover, .pricing-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5), 0 0 25px var(--gold-glow);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+            background: rgba(29, 78, 216, 0.25);
+            color: var(--imperial-bright);
+            border: 1px solid var(--border-imperial);
+        }
+
+        .pricing-card.featured .pricing-badge {
+            background: rgba(212, 175, 55, 0.18);
+            color: var(--gold-light);
+            border-color: var(--border-gold);
+        }
+
+        .price-tag {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            margin: 8px 0 4px 0;
+        }
+
+        .price-tag span {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .value-list {
+            list-style: none;
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .value-list li {
+            font-size: 13px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
         }
 
         /* Barra Inferior de Navegação */
@@ -707,8 +700,7 @@
         @media (max-width: 900px) {
             .deck { padding: 74px 16px 72px 16px; }
             .slide { width: calc(100% - 32px); height: calc(100% - 146px); justify-content: flex-start; padding-top: 10px; }
-            .hero-layout, .grid-2, .grid-3, .grid-4, .arch-nodes, .aso-explorer { grid-template-columns: 1fr; }
-            .sim-sectors { grid-template-columns: repeat(2, 1fr); }
+            .hero-layout, .grid-2, .grid-3, .grid-4, .arch-nodes, .aso-explorer, .pricing-grid { grid-template-columns: 1fr; }
             .brand-mini span { display: none; }
         }
     </style>
@@ -795,7 +787,7 @@
                 <div class="arch-node" onclick="inspectArch(2, this)">
                     <span class="icon">🗄️</span>
                     <div class="node-title">Banco & Tempo Real</div>
-                    <span class="node-tag">Supabase • PostgreSQL</span>
+                    <span class="node-tag">Supabase • Polling 3s</span>
                 </div>
                 <div class="arch-node" onclick="inspectArch(3, this)">
                     <span class="icon">🖨️</span>
@@ -807,35 +799,8 @@
             <div class="arch-inspector" id="arch-inspector"></div>
         </section>
 
-        <!-- SLIDE 4: SIMULADOR AO VIVO -->
-        <section class="slide" data-title="04. Simulador de Fluxo">
-            <div class="kicker">🎛️ Demonstração Interativa</div>
-            <h2 class="slide-title">Simulador de Atendimento em <span class="imperial">Tempo Real</span></h2>
-            <p class="slide-subtitle">Clique nos setores abaixo para simular a liberação de exames por cada profissional e observe o Status Global atualizar automaticamente.</p>
-
-            <div class="sim-box">
-                <div class="sim-header">
-                    <div>
-                        <div style="font-size: 16px; font-weight: 800; color: #fff;">Colaborador: CARLOS EDUARDO SILVA • <span style="color: var(--gold-light);">(ADMISSIONAL)</span></div>
-                        <div style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">Empresa: MINERAÇÃO RIO DO NORTE • CPF: 042.819.302-11 • Função: OPERADOR DE MÁQUINAS</div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="sim-status-pill" id="sim-global-badge">EM ATENDIMENTO (2/5)</span>
-                        <button class="pill-btn" onclick="resetSimulation()">↺ Resetar</button>
-                    </div>
-                </div>
-
-                <div class="sim-sectors" id="sim-sectors"></div>
-
-                <div class="sim-log">
-                    <span id="sim-log-text">⚡ Aguardando interação: clique em um setor pendente para marcar como concluído.</span>
-                    <button class="pill-btn" style="border-color: var(--gold); color: var(--gold-light);" onclick="simulateTvCall()">📢 Simular Chamada TV</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 5: MOTOR DE ASO E DOCUMENTOS -->
-        <section class="slide" data-title="05. Gerador de ASO & e-Social">
+        <!-- SLIDE 4: MOTOR DE ASO E DOCUMENTOS -->
+        <section class="slide" data-title="04. Gerador de ASO & e-Social">
             <div class="kicker">📄 Automação Documental</div>
             <h2 class="slide-title">Emissão Inteligente de <span class="gold">ASO, Prontuário e Psicossocial</span></h2>
             <p class="slide-subtitle">Explore as funcionalidades embarcadas no gerador oficial de documentos (<code>documentos.html</code>).</p>
@@ -864,8 +829,8 @@
             </div>
         </section>
 
-        <!-- SLIDE 6: CONTROLE DE ACESSO (RBAC) -->
-        <section class="slide" data-title="06. Controle por Setor">
+        <!-- SLIDE 5: CONTROLE DE ACESSO (RBAC) -->
+        <section class="slide" data-title="05. Controle por Setor">
             <div class="kicker">🛡️ Governança & Operação</div>
             <h2 class="slide-title">Interfaces Dedicadas por <span class="imperial">Perfil de Acesso</span></h2>
             <p class="slide-subtitle">Selecione um perfil operacional para visualizar o escopo de telas e permissões atribuídas.</p>
@@ -880,8 +845,8 @@
             <div class="grid-2" id="role-details"></div>
         </section>
 
-        <!-- SLIDE 7: IMPACTO E RESULTADOS -->
-        <section class="slide" data-title="07. Impacto e Ganhos">
+        <!-- SLIDE 6: IMPACTO E RESULTADOS -->
+        <section class="slide" data-title="06. Impacto e Ganhos">
             <div class="kicker">📈 Valor Entregue</div>
             <h2 class="slide-title">Ganhos Diretos para a <span class="gold">Clínica Monad</span></h2>
             <p class="slide-subtitle">Benefícios operacionais consolidados com a implantação da plataforma.</p>
@@ -900,10 +865,10 @@
                     <div class="metric-bar"><div class="metric-bar-fill" data-width="92%"></div></div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value" data-target="15" data-suffix="s">0s</div>
+                    <div class="metric-value" data-target="3" data-suffix="s">0s</div>
                     <div style="font-size: 13px; font-weight: 700; color: #fff;">Sincronização Ativa</div>
-                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Polling silencioso sem recarregar</div>
-                    <div class="metric-bar"><div class="metric-bar-fill" data-width="88%"></div></div>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Atualização a cada 3 segundos</div>
+                    <div class="metric-bar"><div class="metric-bar-fill" data-width="95%"></div></div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value" data-target="4" data-suffix=" Docs">0</div>
@@ -921,6 +886,41 @@
             </div>
         </section>
 
+        <!-- SLIDE 7: PROPOSTA DE VALOR -->
+        <section class="slide" data-title="07. Proposta de Valor">
+            <div class="kicker">💎 Investimento & Retorno</div>
+            <h2 class="slide-title">Proposta de Valor & <span class="gold">Modelos de Contratação</span></h2>
+            <p class="slide-subtitle">Solução desenvolvida exclusivamente para a realidade operacional da Clínica Monad — sem limites por usuário e com 100% de aderência ao fluxo da clínica.</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card featured" onclick="selectPricingPlan(this)">
+                    <span class="pricing-badge">⭐ Modelo 01 • Licenciamento Mensal (SaaS)</span>
+                    <h3 style="font-size: 18px; color: #fff;">Operação Contínua + Suporte & Evolução</h3>
+                    <div class="price-tag">R$ 1.290,00 <span>/ mês</span></div>
+                    <div style="font-size: 12px; color: var(--gold-light);">Taxa única de implantação e treinamento: <strong>R$ 1.500,00</strong></div>
+                    <ul class="value-list">
+                        <li><span style="color: var(--gold);">✓</span> Usuários e atendimentos ilimitados em todos os setores</li>
+                        <li><span style="color: var(--gold);">✓</span> Sincronização em tempo real (3s) e hospedagem cloud inclusa</li>
+                        <li><span style="color: var(--gold);">✓</span> Atualizações contínuas, ajustes de layout ASO e suporte técnico prioritário</li>
+                        <li><span style="color: var(--gold);">✓</span> Menor desembolso inicial com previsibilidade mensal</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card" onclick="selectPricingPlan(this)">
+                    <span class="pricing-badge">🏛️ Modelo 02 • Licença Exclusiva + Manutenção</span>
+                    <h3 style="font-size: 18px; color: #fff;">Aquisição do Sistema Personalizado</h3>
+                    <div class="price-tag">R$ 8.500,00 <span>(projeto fechado)</span></div>
+                    <div style="font-size: 12px; color: var(--imperial-bright);">Manutenção técnica e suporte opcional: <strong>R$ 490,00 / mês</strong></div>
+                    <ul class="value-list">
+                        <li><span style="color: var(--imperial-bright);">✓</span> Entrega integral do sistema customizado para a Clínica Monad</li>
+                        <li><span style="color: var(--imperial-bright);">✓</span> Pagamento único pelo desenvolvimento (parcelável na entrega)</li>
+                        <li><span style="color: var(--imperial-bright);">✓</span> Treinamento presencial/remoto da recepção, médicos e técnicos</li>
+                        <li><span style="color: var(--imperial-bright);">✓</span> Custo recorrente mínimo após a implantação</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <!-- SLIDE 8: ENCERRAMENTO -->
         <section class="slide" data-title="08. Conclusão">
             <div style="text-align: center; max-width: 760px; margin: 0 auto;">
@@ -930,11 +930,11 @@
                 <div class="kicker" style="margin: 0 auto 14px auto;">🚀 Sistema Pronto para Operação</div>
                 <h2 class="slide-title">Obrigado pela Confiança, <span class="gold">Clínica Monad</span></h2>
                 <p class="slide-subtitle" style="margin: 0 auto 28px auto;">
-                    O ecossistema encontra-se estruturado, integrado ao banco de dados e alinhado às rotinas de Medicina e Segurança do Trabalho. Estamos à disposição para dúvidas, demonstração prática ao vivo e evoluções futuras.
+                    O ecossistema encontra-se estruturado, integrado ao banco de dados e alinhado às rotinas de Medicina e Segurança do Trabalho. Estamos à disposição para demonstração prática ao vivo e fechamento da proposta.
                 </p>
                 <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
                     <button class="cta-primary" onclick="goToSlide(0)">↺ Reiniciar Apresentação</button>
-                    <button class="pill-btn" style="padding: 13px 22px; font-size: 14px; border-color: var(--gold);" onclick="goToSlide(3)">🎛️ Voltar ao Simulador</button>
+                    <button class="pill-btn" style="padding: 13px 22px; font-size: 14px; border-color: var(--gold);" onclick="goToSlide(6)">💎 Rever Proposta de Valor</button>
                 </div>
             </div>
         </section>
@@ -996,7 +996,7 @@
             document.getElementById('btn-prev').disabled = currentIndex === 0;
             document.getElementById('btn-next').disabled = currentIndex === slides.length - 1;
 
-            if (currentIndex === 6) animateMetrics();
+            if (currentIndex === 5) animateMetrics();
         }
 
         function goToSlide(index) {
@@ -1041,7 +1041,7 @@
         const compareData = {
             depois: [
                 { icon: '⚡', title: 'Check-in Digital Centralizado', desc: 'Cadastro único na recepção com validação de CPF, máscaras automáticas e distribuição imediata para cada setor.', accent: 'gold-accent' },
-                { icon: '📡', title: 'Rastreamento em Tempo Real', desc: 'Cada profissional marca a conclusão no seu painel e a recepção acompanha o progresso global sem deslocamentos.', accent: 'imperial-accent' },
+                { icon: '📡', title: 'Rastreamento a Cada 3 Segundos', desc: 'Cada profissional marca a conclusão no seu painel e a recepção acompanha o progresso global quase instantaneamente.', accent: 'imperial-accent' },
                 { icon: '📑', title: 'ASO & e-Social Automatizados', desc: 'Puxa riscos PGR da função/empresa, códigos e-Social, datas individuais de exames e imprime tudo pronto em A4.', accent: 'gold-accent' }
             ],
             antes: [
@@ -1068,7 +1068,7 @@
         const archDetails = [
             { title: 'CAMADA 01 // FRONTEND & INTERFACE RESPONSIVA', code: '• HTML5 Semântico + CSS Variables (Suporte nativo a Light/Dark Mode)\n• Layout adaptável para Desktops de recepção, Tablets e Smartphones\n• Máscaras inteligentes de entrada (CPF com dígito verificador, Telefone e Datas BR)' },
             { title: 'CAMADA 02 // CONTROLE DE ACESSO & GATEKEEPER', code: '• Autenticação por sessão e roteamento automático por setor (monad_setor)\n• Bloqueio de acesso cruzado entre perfis (Recepção, Setores, Geral e Admin)\n• Exclusão e edição avançada restritas exclusivamente ao Painel Administrativo' },
-            { title: 'CAMADA 03 // PERSISTÊNCIA & SINCRONIZAÇÃO SUPABASE', code: '• Banco PostgreSQL estruturado (atendimentos, empresas_base, funcoes_base, esocial_exames)\n• Sincronização silenciosa a cada 15s sem perda de foco ou digitação\n• Fila de chamadas em tempo real (tabela chamadas) integrada ao painel da recepção' },
+            { title: 'CAMADA 03 // PERSISTÊNCIA & SINCRONIZAÇÃO SUPABASE (3s)', code: '• Banco PostgreSQL estruturado (atendimentos, empresas_base, funcoes_base, esocial_exames)\n• Polling silencioso de alta frequência (a cada 3 segundos) sem perda de foco ou digitação\n• Fila de chamadas em tempo real (tabela chamadas) integrada ao painel da recepção' },
             { title: 'CAMADA 04 // MOTOR DE IMPRESSÃO DOCUMENTAL A4', code: '• Media Queries @media print calibradas em milímetros (210mm × 297mm)\n• Emissão simultânea: ASO (1ª e 2ª Via), Prontuário Médico e Avaliação Psicossocial\n• Suporte a datas individuais por exame e gravação de exames extras no atendimento' }
         ];
 
@@ -1083,60 +1083,7 @@
         }
         inspectArch(0);
 
-        // SLIDE 4: Simulador Interativo
-        let simState = [
-            { id: 'clinico', name: 'Clínico / Neuro', detail: 'Acuidade Visual, Romberg', done: true },
-            { id: 'raiox', name: 'Radiologia', detail: 'RX Tórax PA OIT', done: true },
-            { id: 'fono', name: 'Fonoaudiologia', detail: 'Audiometria Ocupacional', done: false },
-            { id: 'lab', name: 'Laboratório', detail: 'Hemograma, Glicemia', done: false },
-            { id: 'consulta', name: 'Médico Trabalho', detail: 'Avaliação Clínica + Psico', done: false }
-        ];
-
-        function renderSimulation() {
-            const container = document.getElementById('sim-sectors');
-            container.innerHTML = simState.map((s, idx) => `
-                <div class="sim-sector-card ${s.done ? 'checked' : ''}" onclick="toggleSimSector(${idx})">
-                    <div style="font-size: 22px; margin-bottom: 6px;">${s.done ? '✅' : '⏳'}</div>
-                    <div style="font-size: 13px; font-weight: 800; color: #fff;">${s.name}</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">${s.detail}</div>
-                    <div style="font-size: 10px; font-weight: 700; margin-top: 8px; color: ${s.done ? 'var(--success)' : 'var(--warning)'};">
-                        ${s.done ? 'CONCLUÍDO' : 'CLIQUE P/ LIBERAR'}
-                    </div>
-                </div>
-            `).join('');
-
-            const doneCount = simState.filter(s => s.done).length;
-            const badge = document.getElementById('sim-global-badge');
-            if (doneCount === simState.length) {
-                badge.textContent = `CONCLUÍDO (${doneCount}/${simState.length})`;
-                badge.classList.add('done');
-            } else {
-                badge.textContent = `EM ATENDIMENTO (${doneCount}/${simState.length})`;
-                badge.classList.remove('done');
-            }
-        }
-
-        function toggleSimSector(idx) {
-            simState[idx].done = !simState[idx].done;
-            renderSimulation();
-            const s = simState[idx];
-            document.getElementById('sim-log-text').textContent = s.done
-                ? `✔ [SUPABASE UPDATE] Setor "${s.name}" marcado como CONCLUÍDO e refletido na Visão Geral.`
-                : `↺ [SUPABASE UPDATE] Setor "${s.name}" reaberto para atendimento.`;
-        }
-
-        function resetSimulation() {
-            simState.forEach((s, i) => s.done = i < 2);
-            renderSimulation();
-            document.getElementById('sim-log-text').textContent = '⚡ Simulação reiniciada. Clique nos setores para testar.';
-        }
-
-        function simulateTvCall() {
-            document.getElementById('sim-log-text').textContent = '📢 [CHAMADA RECEPÇÃO] Alerta sonoro e visual disparado: "CARLOS EDUARDO SILVA — Consultório Médico".';
-        }
-        renderSimulation();
-
-        // SLIDE 5: Explorador ASO
+        // SLIDE 4: Explorador ASO
         const asoFeatures = [
             {
                 title: 'Vínculo Estrito Empresa × Função (PGR)',
@@ -1179,7 +1126,7 @@
         }
         selectAsoFeature(0);
 
-        // SLIDE 6: Perfis RBAC
+        // SLIDE 5: Perfis RBAC
         const roleData = {
             recepcao: [
                 { title: 'Check-in & Agendamento (index.html)', desc: 'Cadastro rápido de colaboradores, seleção de exames por categoria (Clínico, RX, Lab, Fono, Médico, Psicossocial), validação de CPF e recepção de avisos de chamada.' },
@@ -1190,7 +1137,7 @@
                 { title: 'Recursos Específicos por Área', desc: 'Laboratório conta com campo de observação de coleta e Relação de Envio; Consultório Médico conta com botão de Chamada Sonora na Recepção.' }
             ],
             gestao: [
-                { title: 'Visão Geral Global (checkin.html)', desc: 'Acompanhamento consolidado de todos os setores em tempo real, com filtro por aba e status global (Em Atendimento / Concluído).' },
+                { title: 'Visão Geral Global (checkin.html)', desc: 'Acompanhamento consolidado de todos os setores a cada 3 segundos, com filtro por aba e status global (Em Atendimento / Concluído).' },
                 { title: 'Gerador de ASO & Base de Dados', desc: 'Emissão de ASO, Prontuário e Avaliação Psicossocial (documentos.html) e manutenção de empresas, funções e exames (cadastros.html).' }
             ],
             admin: [
@@ -1211,7 +1158,7 @@
         }
         selectRole('recepcao');
 
-        // SLIDE 7: Animação de Contadores
+        // SLIDE 6: Animação de Contadores
         function animateMetrics() {
             document.querySelectorAll('.metric-value').forEach(el => {
                 const target = parseInt(el.dataset.target, 10);
@@ -1231,6 +1178,12 @@
                 bar.style.width = '0%';
                 setTimeout(() => bar.style.width = bar.dataset.width, 80);
             });
+        }
+
+        // SLIDE 7: Destaque visual nos cards de proposta
+        function selectPricingPlan(card) {
+            document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('featured'));
+            card.classList.add('featured');
         }
     </script>
 </body>
